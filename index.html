@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Catto</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="styles.css">
+	<script>
+		const POLYFILL_URL = "polyfill.txt",
+			PDE_URL = "VirtualPet.pde",
+			CANVAS_ID = "VirtualPet"
+
+		addEventListener("load", async () => {
+			let [polyfill, pde] = await Promise.all([
+				fetch(POLYFILL_URL).then(_ => _.text()),
+				fetch(PDE_URL).then(_ => _.text())
+			])
+
+			const pdeCanvas = document.createElement('canvas')
+			pdeCanvas.id = CANVAS_ID
+			document.getElementById("content").appendChild(pdeCanvas)
+
+			const processing = document.createElement("script")
+			processing.src = "processing.js"
+			document.head.appendChild(processing)
+
+			processing.onload = () => {
+				new Processing(pdeCanvas, `${polyfill}\n\n${pde}`)
+			}
+		})
+	</script>
+</head>
+
+<body>
+	<header>
+		<h1>Catto</h1>
+	</header>
+	<section id="content">
+	</section>
+	<footer>
+		Eddie :D
+	</footer>
+</body>
+
+</html>
