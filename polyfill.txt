@@ -1,9 +1,3 @@
-// Contains some polyfills to fix the issues in README. Pretty much everything works
-// except for `clear`, `push` and `pop`.
-// Some notes:
-//  - `background` with an image works, not sure why this is there. (bad image-canvas size?)
-//  - `CHORD` and `PIE` modes indeed do work, not sure why this is here too.
-
 void circle(float x, float y, float extent) {
   ellipse(x, y, extent, extent);
 }
